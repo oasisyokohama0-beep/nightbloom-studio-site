@@ -1,0 +1,733 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+/* ============================================================
+   NIGHT BLOOM STUDIO — 2026 redesign
+   Layout: white cyclorama. Paper ground, ink type, portraits as the
+   only color. One deep night-violet block for the final call to action.
+   ============================================================ */
+.nx{
+  --paper:#F2F2EF;
+  --paper-2:#E7E6E1;
+  --paper-3:#DCDBD5;
+  --ink:#15151A;
+  --ink-2:#5A5A63;
+  --ink-3:#8A8A92;
+  --line:#CFCEC7;
+  --night:#241A45;
+  --night-2:#2F2459;
+  --night-text:#EFEBFF;
+  --line-green:#06C755;
+  --line-green-2:#05B04B;
+  --display:'Shippori Mincho B1','Hiragino Mincho ProN','Yu Mincho','YuMincho',serif;
+  --body:'Zen Kaku Gothic New','Hiragino Kaku Gothic ProN','Hiragino Sans','Yu Gothic',Meiryo,sans-serif;
+  --max:1160px;
+  --ease:cubic-bezier(.22,1,.36,1);
+
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:15px;
+  line-height:1.9;
+  letter-spacing:.02em;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+  margin:0;
+}
+.nx *,.nx *::before,.nx *::after{box-sizing:border-box;}
+.nx h1,.nx h2,.nx h3,.nx p,.nx ul,.nx ol,.nx figure,.nx dl,.nx dd,.nx table{margin:0;padding:0;}
+.nx ul,.nx ol{list-style:none;}
+.nx img{display:block;max-width:100%;height:auto;}
+.nx a{color:inherit;text-decoration:none;}
+.nx a:focus-visible,.nx button:focus-visible,.nx summary:focus-visible{outline:2px solid var(--night);outline-offset:3px;}
+.nx-in{width:min(100% - 40px,var(--max));margin-inline:auto;}
+.nx-sec{padding-block:clamp(72px,10vw,128px);}
+.nx-label{
+  font-size:11px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-3);
+  display:flex;align-items:center;gap:14px;
+}
+.nx-label::before{content:"";width:28px;height:1px;background:var(--ink-3);}
+.nx-h2{
+  font-family:var(--display);font-weight:500;font-size:clamp(28px,4.2vw,48px);line-height:1.35;
+  letter-spacing:.02em;text-wrap:balance;margin-top:18px;
+}
+.nx-lead{max-width:38em;color:var(--ink-2);font-size:15px;margin-top:22px;}
+.nx-display{font-family:var(--display);}
+
+/* Buttons */
+.nx-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  min-height:56px;padding:0 30px;border-radius:999px;font-weight:700;font-size:15px;letter-spacing:.06em;
+  border:1.5px solid transparent;transition:transform .35s var(--ease),background .3s,color .3s,border-color .3s;
+  white-space:nowrap;
+}
+.nx-btn:hover{transform:translateY(-2px);}
+.nx .nx-btn-line{background:var(--line-green);color:#fff;}
+.nx .nx-btn-line:hover{background:var(--line-green-2);color:#fff;}
+.nx .nx-btn-ghost{border-color:var(--ink);color:var(--ink);background:transparent;}
+.nx .nx-btn-ghost:hover{background:var(--ink);color:var(--paper);}
+.nx .nx-btn-paper{background:var(--paper);color:var(--ink);}
+.nx .nx-btn-paper:hover{background:#fff;color:var(--ink);}
+.nx-line-mark{
+  width:22px;height:22px;border-radius:6px;background:#fff;color:var(--line-green);
+  display:grid;place-items:center;font-weight:900;font-size:12px;letter-spacing:0;flex:none;
+}
+.nx-btn-ghost .nx-line-mark{background:var(--line-green);color:#fff;}
+
+/* Header */
+.nx-head{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:60;
+  background:color-mix(in srgb,var(--paper) 84%,transparent);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nx-head-in{height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.nx-logo{display:flex;flex-direction:column;line-height:1.1;}
+.nx-logo b{font-family:var(--display);font-weight:700;font-size:17px;letter-spacing:.14em;}
+.nx-logo span{font-size:9.5px;letter-spacing:.3em;color:var(--ink-3);text-transform:uppercase;margin-top:4px;}
+.nx-nav{display:flex;gap:30px;}
+.nx-nav a{font-size:13px;font-weight:500;letter-spacing:.08em;color:var(--ink-2);position:relative;padding:6px 0;}
+.nx-nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease);}
+.nx-nav a:hover{color:var(--ink);}
+.nx-nav a:hover::after{transform:scaleX(1);}
+.nx-head .nx-btn{min-height:44px;padding:0 20px;font-size:13px;}
+.nx-burger{display:none;width:44px;height:44px;background:none;border:0;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:0;}
+.nx-burger span{display:block;width:24px;height:1.5px;background:var(--ink);transition:transform .3s,opacity .3s;}
+.nx-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7.5px) rotate(45deg);}
+.nx-burger[aria-expanded="true"] span:nth-child(2){opacity:0;}
+.nx-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg);}
+.nx-sheet{
+  position:fixed;inset:0;z-index:55;background:var(--paper);padding:120px 28px 40px;
+  display:flex;flex-direction:column;gap:6px;
+  transform:translateY(-8px);opacity:0;pointer-events:none;transition:opacity .3s,transform .4s var(--ease);
+}
+.nx-sheet.is-open{opacity:1;transform:none;pointer-events:auto;}
+.nx-sheet a{font-family:var(--display);font-size:28px;padding:14px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline;}
+.nx-sheet a small{font-family:var(--body);font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-3);}
+.nx-sheet .nx-btn{margin-top:auto;}
+
+/* Hero */
+.nx-hero{padding-block:clamp(40px,7vw,96px) clamp(56px,8vw,104px);position:relative;}
+.nx-hero-in{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(32px,6vw,88px);align-items:center;}
+.nx-hero-copy{min-width:0;}
+.nx-hero-eyebrow{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3);font-weight:500;}
+.nx-hero-eyebrow span+span::before{content:"/";margin-right:18px;color:var(--line);}
+.nx-h1{
+  font-family:var(--display);font-weight:500;font-size:clamp(44px,6vw,72px);line-height:1.14;letter-spacing:.01em;
+  margin-top:28px;text-wrap:balance;
+}
+.nx-h1 em{font-style:normal;position:relative;display:inline-block;}
+.nx-h1 em::after{
+  content:"";position:absolute;left:0;right:0;bottom:.08em;height:.09em;background:var(--night);opacity:.9;
+  transform:scaleX(0);transform-origin:left;animation:nx-rule 1.1s var(--ease) .7s forwards;
+}
+.nx-hero-lead{margin-top:30px;max-width:30em;font-size:15.5px;color:var(--ink-2);}
+.nx-hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px;}
+.nx-hero-meta{display:flex;flex-wrap:wrap;gap:0;margin-top:44px;border-top:1px solid var(--line);}
+.nx-hero-meta div{padding:16px 28px 0 0;margin-right:28px;}
+.nx-hero-meta b{display:block;font-family:var(--display);font-size:26px;font-weight:500;line-height:1.2;font-variant-numeric:tabular-nums;}
+.nx-hero-meta b small{font-size:13px;margin-left:2px;}
+.nx-hero-meta span{font-size:11px;letter-spacing:.16em;color:var(--ink-3);}
+.nx-hero-art{position:relative;min-width:0;aspect-ratio:5/6;}
+.nx-hero-art figure{position:absolute;overflow:hidden;background:var(--paper-2);}
+.nx-hero-art img{width:100%;height:100%;object-fit:cover;object-position:center 18%;}
+.nx-hero-art .nx-ph-a{top:0;right:0;width:76%;height:82%;}
+.nx-hero-art .nx-ph-b{left:0;bottom:0;width:46%;height:52%;box-shadow:0 30px 60px -30px rgba(21,21,26,.45);}
+.nx-hero-art .nx-ph-tag{
+  position:absolute;right:0;bottom:4%;writing-mode:vertical-rl;font-size:10px;letter-spacing:.34em;color:var(--ink-3);text-transform:uppercase;
+}
+.nx-up{animation:nx-up .9s var(--ease) both;}
+.nx-up-2{animation-delay:.12s}.nx-up-3{animation-delay:.24s}.nx-up-4{animation-delay:.36s}.nx-up-5{animation-delay:.5s}
+@keyframes nx-up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes nx-rule{to{transform:scaleX(1)}}
+.nx-hero-art figure{animation:nx-fade 1.2s var(--ease) both;}
+.nx-hero-art .nx-ph-b{animation-delay:.3s}
+@keyframes nx-fade{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* Ticker */
+.nx-ticker{border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);overflow:hidden;background:var(--paper);}
+.nx-ticker-track{display:flex;width:max-content;animation:nx-ticker 38s linear infinite;}
+.nx-ticker ul{display:flex;align-items:center;padding-block:14px;}
+.nx-ticker li{display:flex;align-items:center;gap:28px;padding-right:28px;font-family:var(--display);font-size:15px;letter-spacing:.1em;white-space:nowrap;}
+.nx-ticker li::after{content:"";width:5px;height:5px;background:var(--night);transform:rotate(45deg);}
+@keyframes nx-ticker{to{transform:translateX(-50%)}}
+
+/* Concept */
+.nx-concept .nx-in{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(32px,6vw,96px);align-items:center;}
+.nx-concept figure{aspect-ratio:3/4;overflow:hidden;background:var(--paper-2);max-width:460px;}
+.nx-concept img{width:100%;height:100%;object-fit:cover;}
+.nx-concept-copy{min-width:0;}
+.nx-concept .nx-h2{font-size:clamp(30px,4.6vw,56px);}
+.nx-concept-text{margin-top:30px;max-width:30em;color:var(--ink-2);font-size:15.5px;}
+.nx-concept-text strong{color:var(--ink);font-weight:500;}
+.nx-concept-note{margin-top:34px;padding-left:22px;border-left:1.5px solid var(--night);font-family:var(--display);font-size:17px;line-height:1.8;}
+
+/* Reasons */
+.nx-why{background:var(--paper-2);}
+.nx-why-head{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:40px;align-items:end;}
+.nx-why-head .nx-h2{font-size:clamp(26px,3.4vw,40px);}
+.nx-why-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 56px;margin-top:56px;border-top:1px solid var(--ink);}
+.nx-why-item{padding:34px 0 36px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 26px;min-width:0;}
+.nx-why-item i{font-style:normal;font-family:var(--display);font-size:13px;letter-spacing:.2em;color:var(--ink-3);padding-top:9px;}
+.nx-why-item h3{font-family:var(--display);font-weight:500;font-size:clamp(21px,2.4vw,26px);line-height:1.4;letter-spacing:.02em;}
+.nx-why-item p{grid-column:2;margin-top:12px;color:var(--ink-2);max-width:28em;}
+.nx-why-item p b{color:var(--ink);font-weight:500;}
+
+/* Gallery strip */
+.nx-gallery{padding-block:clamp(64px,9vw,112px) 0;}
+.nx-gallery-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;}
+.nx-gallery-head p{color:var(--ink-2);max-width:32em;}
+.nx-strip{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:40px 20px 24px;margin-top:0;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+.nx-strip::-webkit-scrollbar{display:none;}
+.nx-strip figure{flex:0 0 clamp(220px,24vw,300px);aspect-ratio:3/4;overflow:hidden;background:var(--paper-2);scroll-snap-align:start;}
+.nx-strip figure:nth-child(even){margin-top:32px;}
+.nx-strip img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease);}
+.nx-strip figure:hover img{transform:scale(1.04);}
+.nx-strip-note{font-size:11px;letter-spacing:.2em;color:var(--ink-3);text-transform:uppercase;padding-bottom:8px;}
+
+/* Plan */
+.nx-plan-box{
+  margin-top:48px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
+  border:1.5px solid var(--ink);background:#fff;
+}
+.nx-plan-main{padding:clamp(28px,4vw,52px);border-right:1.5px solid var(--ink);min-width:0;}
+.nx-plan-sub{padding:clamp(28px,4vw,52px);background:var(--paper);min-width:0;}
+.nx-plan-kicker{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;}
+.nx-plan-kicker b{font-family:var(--display);font-size:20px;font-weight:500;}
+.nx-plan-kicker span{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3);}
+.nx-price{display:flex;align-items:baseline;gap:10px;margin-top:22px;font-family:var(--display);font-variant-numeric:tabular-nums;}
+.nx-price .nx-yen{font-size:clamp(28px,3.4vw,40px);}
+.nx-price .nx-num{font-size:clamp(64px,8vw,104px);line-height:1;letter-spacing:-.01em;font-weight:500;}
+.nx-price .nx-tax{font-family:var(--body);font-size:12px;color:var(--ink-2);letter-spacing:.1em;}
+.nx-price-note{font-size:13px;color:var(--ink-2);margin-top:6px;}
+.nx-feat{margin-top:30px;border-top:1px solid var(--line);}
+.nx-feat li{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--line);font-size:14.5px;}
+.nx-feat li span:last-child{color:var(--ink-3);font-size:12px;letter-spacing:.1em;}
+.nx-plan-main .nx-btn{margin-top:32px;width:100%;}
+.nx-plan-sub h3{font-family:var(--display);font-size:20px;font-weight:500;}
+.nx-plan-sub p.nx-opt-lead{color:var(--ink-2);font-size:13.5px;margin-top:8px;}
+.nx-opt{margin-top:22px;width:100%;border-collapse:collapse;}
+.nx-opt th,.nx-opt td{padding:13px 0;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-weight:400;font-size:14.5px;}
+.nx-opt td{text-align:right;font-family:var(--display);font-variant-numeric:tabular-nums;white-space:nowrap;padding-left:16px;}
+.nx-opt th small{display:block;font-size:12px;color:var(--ink-3);letter-spacing:.04em;}
+.nx-plan-foot{margin-top:22px;font-size:12.5px;color:var(--ink-2);}
+
+/* Flow */
+.nx-flow{background:var(--ink);color:var(--paper);}
+.nx-flow .nx-label{color:var(--ink-3);}
+.nx-flow .nx-label::before{background:var(--ink-3);}
+.nx-flow-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:56px;position:relative;}
+.nx-flow-grid::before{content:"";position:absolute;left:0;right:0;top:22px;height:1px;background:rgba(242,242,239,.22);}
+.nx-step{padding:0 28px 0 0;position:relative;min-width:0;}
+.nx-step i{
+  font-style:normal;display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;
+  background:var(--ink);border:1px solid rgba(242,242,239,.5);font-family:var(--display);font-size:14px;letter-spacing:.1em;position:relative;z-index:1;
+}
+.nx-step h3{font-family:var(--display);font-weight:500;font-size:22px;margin-top:22px;line-height:1.4;}
+.nx-step p{margin-top:12px;color:rgba(242,242,239,.68);font-size:14px;}
+.nx-step em{font-style:normal;font-size:11px;letter-spacing:.18em;color:var(--ink-3);display:block;margin-top:6px;text-transform:uppercase;}
+
+/* Voices */
+.nx-voice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:48px;}
+.nx-voice{background:#fff;border:1px solid var(--line);padding:34px 30px 30px;display:flex;flex-direction:column;gap:18px;min-width:0;}
+.nx-voice q{quotes:none;font-family:var(--display);font-size:17.5px;line-height:1.85;flex:1;}
+.nx-voice q::before{content:"“";display:block;font-size:44px;line-height:.6;color:var(--night);margin-bottom:14px;}
+.nx-voice footer{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:16px;font-size:12.5px;color:var(--ink-2);letter-spacing:.06em;}
+.nx-voice footer b{font-weight:500;color:var(--ink);}
+.nx-stars{color:var(--night);letter-spacing:.14em;font-size:11px;}
+
+/* FAQ */
+.nx-faq{background:var(--paper-2);}
+.nx-faq .nx-in{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:clamp(32px,5vw,80px);}
+.nx-faq-list{border-top:1px solid var(--ink);}
+.nx-faq-list details{border-bottom:1px solid var(--line);}
+.nx-faq-list summary{
+  list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;
+  padding:22px 0;font-family:var(--display);font-size:17.5px;font-weight:500;
+}
+.nx-faq-list summary::-webkit-details-marker{display:none;}
+.nx-faq-list summary::after{
+  content:"";flex:none;width:12px;height:12px;
+  background:linear-gradient(var(--ink),var(--ink)) center/100% 1.5px no-repeat,linear-gradient(var(--ink),var(--ink)) center/1.5px 100% no-repeat;
+  transition:transform .35s var(--ease);
+}
+.nx-faq-list details[open] summary::after{transform:rotate(45deg);}
+.nx-faq-list details p{padding:0 40px 24px 0;color:var(--ink-2);max-width:40em;}
+.nx-faq-side p{color:var(--ink-2);margin-top:22px;max-width:28em;}
+
+/* Access */
+.nx-access .nx-in{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(32px,5vw,80px);align-items:start;}
+.nx-access dl{border-top:1px solid var(--ink);margin-top:0;}
+.nx-access-row{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;padding:18px 0;border-bottom:1px solid var(--line);}
+.nx-access dt{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-3);padding-top:6px;}
+.nx-access dd{font-size:15px;}
+.nx-access dd small{display:block;font-size:12.5px;color:var(--ink-3);}
+.nx-access-map{aspect-ratio:4/3;background:var(--paper-2);position:relative;overflow:hidden;display:grid;place-items:center;text-align:center;padding:24px;}
+.nx-access-map .nx-rings{position:absolute;inset:0;background:
+  radial-gradient(circle at center,transparent 0 60px,var(--line) 60px 61px,transparent 61px 120px,var(--line) 120px 121px,transparent 121px 180px,var(--line) 180px 181px,transparent 181px 240px,var(--line) 240px 241px,transparent 241px);}
+.nx-access-map b{position:relative;font-family:var(--display);font-size:clamp(26px,3vw,36px);font-weight:500;line-height:1.3;}
+.nx-access-map span{position:relative;display:block;font-size:11px;letter-spacing:.24em;color:var(--ink-3);text-transform:uppercase;margin-top:10px;}
+.nx-access-map i{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--night);left:50%;top:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 6px rgba(36,26,69,.14);}
+
+/* Service copy (SEO) */
+.nx-service{padding-block:clamp(56px,7vw,88px);border-top:1px solid var(--line);}
+.nx-service h2{font-family:var(--display);font-weight:500;font-size:clamp(19px,2.2vw,24px);line-height:1.6;margin-top:16px;}
+.nx-service p{color:var(--ink-2);margin-top:16px;max-width:52em;font-size:14.5px;}
+.nx-service p strong{font-weight:500;color:var(--ink);}
+.nx-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;}
+.nx-tags li{border:1px solid var(--line);padding:6px 14px;font-size:12px;letter-spacing:.08em;color:var(--ink-2);border-radius:999px;}
+
+/* CTA */
+.nx-cta{background:var(--night);color:var(--night-text);padding-block:clamp(80px,11vw,140px);position:relative;overflow:hidden;}
+.nx-cta::before{content:"";position:absolute;inset:auto -10% -40% auto;width:60vw;height:60vw;max-width:720px;max-height:720px;border-radius:50%;background:radial-gradient(circle,var(--night-2) 0,transparent 68%);opacity:.9;}
+.nx-cta .nx-in{position:relative;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:40px;align-items:center;}
+.nx-cta .nx-label{color:rgba(239,235,255,.6);}
+.nx-cta .nx-label::before{background:rgba(239,235,255,.6);}
+.nx-cta h2{font-family:var(--display);font-weight:500;font-size:clamp(34px,5.4vw,68px);line-height:1.25;margin-top:20px;text-wrap:balance;}
+.nx-cta p{margin-top:22px;color:rgba(239,235,255,.72);max-width:30em;}
+.nx-cta-act{display:flex;flex-direction:column;gap:14px;align-items:stretch;}
+.nx-cta-act .nx-btn{min-height:64px;font-size:16px;}
+.nx-cta-act small{text-align:center;font-size:12px;letter-spacing:.14em;color:rgba(239,235,255,.6);}
+
+/* Footer */
+.nx-foot{padding-block:40px 110px;border-top:1px solid var(--line);}
+.nx-foot .nx-in{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;}
+.nx-foot-links{display:flex;flex-wrap:wrap;gap:22px;}
+.nx-foot-links a{font-size:12px;letter-spacing:.12em;color:var(--ink-2);}
+.nx-foot-links a:hover{color:var(--ink);}
+.nx-foot small{font-size:11px;letter-spacing:.08em;color:var(--ink-3);width:100%;}
+
+/* Mobile fixed bar */
+.nx-bar{
+  display:none;position:fixed;left:0;right:0;bottom:0;z-index:50;
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));
+  background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-top:1px solid var(--line);
+}
+.nx-bar .nx-btn{width:100%;min-height:52px;}
+
+@media (max-width:1024px){
+  .nx-nav{gap:20px;}
+  .nx-voice-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .nx-flow-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 24px;}
+  .nx-flow-grid::before{display:none;}
+}
+@media (max-width:860px){
+  .nx-in{width:min(100% - 32px,var(--max));}
+  .nx-nav{display:none;}
+  .nx-head .nx-btn{display:none;}
+  .nx-burger{display:flex;}
+  .nx-head-in{height:64px;}
+  .nx-hero{padding-block:36px 56px;}
+  .nx-hero-in{grid-template-columns:1fr;gap:40px;}
+  .nx-hero-art{aspect-ratio:auto;height:auto;display:grid;grid-template-columns:1fr 1fr;gap:12px;order:-1;}
+  .nx-hero-art .nx-ph-a,.nx-hero-art .nx-ph-b{position:static;width:auto;height:auto;aspect-ratio:3/4;animation-delay:0s;}
+  .nx-hero-art .nx-ph-b{box-shadow:none;margin-top:28px;}
+  .nx-hero-art .nx-ph-tag{display:none;}
+  .nx-hero-meta div{padding-right:18px;margin-right:18px;}
+  .nx-hero-meta b{font-size:22px;}
+  .nx-concept .nx-in{grid-template-columns:1fr;gap:36px;}
+  .nx-concept figure{max-width:100%;aspect-ratio:4/5;}
+  .nx-why-head{grid-template-columns:1fr;gap:16px;}
+  .nx-why-grid{grid-template-columns:1fr;margin-top:40px;}
+  .nx-why-item{padding:26px 0;}
+  .nx-strip{padding:32px 16px 20px;}
+  .nx-strip figure{flex-basis:min(62vw,260px);}
+  .nx-plan-box{grid-template-columns:1fr;}
+  .nx-plan-main{border-right:0;border-bottom:1.5px solid var(--ink);}
+  .nx-voice-grid{grid-template-columns:1fr;}
+  .nx-faq .nx-in,.nx-access .nx-in,.nx-cta .nx-in{grid-template-columns:1fr;}
+  .nx-access-row{grid-template-columns:96px minmax(0,1fr);}
+  .nx-cta h2{font-size:clamp(32px,9vw,48px);}
+  .nx-bar{display:block;}
+  .nx-foot{padding-bottom:130px;}
+}
+@media (max-width:480px){
+  .nx-flow-grid{grid-template-columns:1fr;gap:34px;}
+  .nx-hero-cta .nx-btn{width:100%;}
+  .nx-h1{font-size:clamp(40px,12vw,56px);}
+  .nx-hero-meta div{padding-right:14px;margin-right:14px;}
+}
+@media (prefers-reduced-motion:reduce){
+  .nx *{animation:none !important;transition:none !important;}
+  .nx-h1 em::after{transform:none;}
+  .nx-ticker-track{animation:none !important;}
+}
+</style>
+
+<div class="nx" id="top">
+
+  <header class="nx-head">
+    <div class="nx-in nx-head-in">
+      <a href="#top" class="nx-logo" aria-label="Night Bloom Studio トップへ">
+        <b>NIGHT BLOOM STUDIO</b>
+        <span>Shibuya · Portrait Studio</span>
+      </a>
+      <nav class="nx-nav" aria-label="ページ内リンク">
+        <a href="#whyus">選ばれる理由</a>
+        <a href="#plan">料金</a>
+        <a href="#flow">ご予約の流れ</a>
+        <a href="#voices">お客様の声</a>
+        <a href="#faq">よくある質問</a>
+        <a href="#studio">アクセス</a>
+      </nav>
+      <a href="https://lin.ee/7xUnkPO" class="nx-btn nx-btn-line" target="_blank" rel="noopener"><span class="nx-line-mark">L</span>LINEで予約</a>
+      <button class="nx-burger" id="nxBurger" aria-expanded="false" aria-controls="nxSheet" aria-label="ナビゲーションを開く"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <nav class="nx-sheet" id="nxSheet" aria-label="モバイルナビゲーション">
+    <a href="#whyus">選ばれる理由<small>Why us</small></a>
+    <a href="#plan">料金<small>Plan</small></a>
+    <a href="#flow">ご予約の流れ<small>Flow</small></a>
+    <a href="#voices">お客様の声<small>Voices</small></a>
+    <a href="#faq">よくある質問<small>FAQ</small></a>
+    <a href="#studio">アクセス<small>Studio</small></a>
+    <a href="https://lin.ee/7xUnkPO" class="nx-btn nx-btn-line" target="_blank" rel="noopener"><span class="nx-line-mark">L</span>LINEで予約する</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="nx-hero">
+    <div class="nx-in nx-hero-in">
+      <div class="nx-hero-copy">
+        <p class="nx-hero-eyebrow nx-up"><span>渋谷 宣材写真スタジオ</span><span>カメラマン付き</span><span>夜職・ナイトワーカー専門</span></p>
+        <h1 class="nx-h1 nx-up nx-up-2">魅せたい自分を、<br><em>武器にする。</em></h1>
+        <p class="nx-hero-lead nx-up nx-up-3">指名数が伸びない。SNSの反応が薄い。そのもどかしさの多くは、写真一枚で静かに変えられます。業界を知るカメラマンが、あなたの「魅せ方」を一緒に設計します。</p>
+        <div class="nx-hero-cta nx-up nx-up-4">
+          <a href="https://lin.ee/7xUnkPO" class="nx-btn nx-btn-line" target="_blank" rel="noopener"><span class="nx-line-mark">L</span>LINEで予約・相談する</a>
+          <a href="#plan" class="nx-btn nx-btn-ghost">料金を見る</a>
+        </div>
+        <div class="nx-hero-meta nx-up nx-up-5">
+          <div><b>¥15,000<small>〜</small></b><span>税込・追加費用なし</span></div>
+          <div><b>60<small>分〜</small></b><span>カット数制限なし</span></div>
+          <div><b>徒歩5<small>分</small></b><span>渋谷駅から</span></div>
+          <div><b>24<small>h</small></b><span>LINE受付</span></div>
+        </div>
+      </div>
+      <div class="nx-hero-art" aria-hidden="true">
+        <figure class="nx-ph-a"><img src="https://nightbloom-studio.jp/wp-content/uploads/2026/03/hero-photo-3.jpg" alt="" loading="eager"></figure>
+        <figure class="nx-ph-b"><img src="https://nightbloom-studio.jp/wp-content/uploads/2026/03/hero-photo-1.jpg" alt="" loading="eager"></figure>
+        <span class="nx-ph-tag">Night Bloom Studio — Shibuya</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="nx-ticker" aria-hidden="true">
+    <div class="nx-ticker-track">
+      <ul>
+        <li>渋谷駅 徒歩5分</li><li>¥15,000〜 税込</li><li>全プラン カメラマン付き</li><li>時間内カット数 無制限</li><li>撮影データ 全納品</li><li>ポージング指導あり</li><li>24時間 LINE受付</li><li>深夜相談可</li>
+      </ul>
+      <ul>
+        <li>渋谷駅 徒歩5分</li><li>¥15,000〜 税込</li><li>全プラン カメラマン付き</li><li>時間内カット数 無制限</li><li>撮影データ 全納品</li><li>ポージング指導あり</li><li>24時間 LINE受付</li><li>深夜相談可</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CONCEPT -->
+  <section class="nx-sec nx-concept">
+    <div class="nx-in">
+      <figure><img src="https://nightbloom-studio.jp/wp-content/uploads/2026/03/hero-photo-2.jpg" alt="Night Bloom Studio 撮影例" loading="lazy"></figure>
+      <div class="nx-concept-copy">
+        <p class="nx-label">Concept</p>
+        <h2 class="nx-h2">写真が変われば、<br>世界の見え方が変わる。</h2>
+        <p class="nx-concept-text">自分では「いつもの顔」でも、写真はお客様が最初に出会うあなたです。Night Bloom Studio は、<strong>夜職・ナイトワーカー専門</strong>の撮影スタジオとして、「かっこよさ」と「清潔感」のバランスを一人ひとりに合わせて設計します。</p>
+        <p class="nx-concept-note">1人1人に合う「魅せ方」で、<br>「指名される写真」を撮影します。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="nx-sec nx-why" id="whyus">
+    <div class="nx-in">
+      <div class="nx-why-head">
+        <div>
+          <p class="nx-label">Why us</p>
+          <h2 class="nx-h2">渋谷のカメラマン付きスタジオが<br>選ばれる理由</h2>
+        </div>
+        <p class="nx-lead">撮影が初めての方も、何度か撮ったけれど手応えがなかった方も。写真の「前」と「後」まで、プロが伴走します。</p>
+      </div>
+      <div class="nx-why-grid">
+        <div class="nx-why-item">
+          <i>専門</i><h3>ナイトワーカー専門</h3>
+          <p>業界の空気を知るスタッフが、<b>お店で映える・指名につながる</b>魅力を的確に引き出します。</p>
+        </div>
+        <div class="nx-why-item">
+          <i>設計</i><h3>世界観設計から一緒に</h3>
+          <p>「かっこよさ」と「清潔感」のバランスを、衣装・表情・光まで含めてプロが丁寧にデザインします。</p>
+        </div>
+        <div class="nx-why-item">
+          <i>指導</i><h3>初回でも、自然に撮れる</h3>
+          <p>緊張している方ほど、ポージング指導で変わります。<b>撮影が初めての方</b>こそ、安心してお任せください。</p>
+        </div>
+        <div class="nx-why-item">
+          <i>料金</i><h3>明朗会計</h3>
+          <p>渋谷駅徒歩5分以内。<b>¥15,000〜（税込）、追加費用なし。</b>1時間から本格撮影ができます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="nx-gallery">
+    <div class="nx-in nx-gallery-head">
+      <div>
+        <p class="nx-label">Works</p>
+        <h2 class="nx-h2">撮影事例</h2>
+      </div>
+      <p>掲載はすべて事前にご本人の許可をいただいたものです。顔出しNGの方のデータは厳重に管理します。</p>
+    </div>
+    <div class="nx-strip">
+      <figure><img src="https://nightbloom-studio.jp/wp-content/uploads/2026/03/hero-photo-1.jpg" alt="撮影事例 1" loading="lazy"></figure>
+      <figure><img src="https://nightbloom-studio.jp/wp-content/uploads/2026/03/hero-photo-2.jpg" alt="撮影事例 2" loading="lazy"></figure>
+      <figure><img src="https://nightbloom-studio.jp/wp-content/uploads/2026/03/hero-photo-3.jpg" alt="撮影事例 3" loading="lazy"></figure>
+      <figure><img src="https://nightbloom-studio.jp/wp-content/uploads/2026/03/hero-photo-4.jpg" alt="撮影事例 4" loading="lazy"></figure>
+      <figure><img src="https://nightbloom-studio.jp/wp-content/uploads/2026/03/hero-photo-5.jpg" alt="撮影事例 5" loading="lazy"></figure>
+    </div>
+    <div class="nx-in"><p class="nx-strip-note">Scroll →</p></div>
+  </section>
+
+  <!-- PLAN -->
+  <section class="nx-sec" id="plan">
+    <div class="nx-in">
+      <p class="nx-label">Plan</p>
+      <h2 class="nx-h2">料金・プラン</h2>
+      <p class="nx-lead">時間内カット数制限なし。お客様のご納得がいくまで、最高の1枚を撮り続けます。</p>
+      <div class="nx-plan-box">
+        <div class="nx-plan-main">
+          <div class="nx-plan-kicker"><b>スタンダードプラン</b><span>Standard</span></div>
+          <div class="nx-price"><span class="nx-yen">¥</span><span class="nx-num">15,000</span><span class="nx-tax">税込</span></div>
+          <p class="nx-price-note">1時間撮影プラン。カメラマン・ポージング指導込み。</p>
+          <ul class="nx-feat">
+            <li><span>60分撮影</span><span>Shooting</span></li>
+            <li><span>衣装チェンジ可</span><span>Outfit</span></li>
+            <li><span>複数パターン撮影</span><span>Variations</span></li>
+            <li><span>撮影データ全納品</span><span>All data</span></li>
+            <li><span>SNS・宣材対応</span><span>Ready to use</span></li>
+          </ul>
+          <a href="https://lin.ee/7xUnkPO" class="nx-btn nx-btn-line" target="_blank" rel="noopener"><span class="nx-line-mark">L</span>このプランでLINE予約</a>
+        </div>
+        <div class="nx-plan-sub">
+          <h3>オプション</h3>
+          <p class="nx-opt-lead">必要なものだけ、追加できます。</p>
+          <table class="nx-opt">
+            <tbody>
+              <tr><th>レタッチ<small>5枚</small></th><td>+ ¥5,000</td></tr>
+              <tr><th>レタッチ<small>全カット</small></th><td>+ ¥15,000</td></tr>
+              <tr><th>衣装レンタル</th><td>+ ¥3,000〜</td></tr>
+              <tr><th>ヘアメイク</th><td>+ ¥8,000〜</td></tr>
+              <tr><th>延長<small>30分</small></th><td>+ ¥5,000</td></tr>
+              <tr><th>出張撮影</th><td>要相談</td></tr>
+            </tbody>
+          </table>
+          <p class="nx-plan-foot">お急ぎの場合は即日納品オプションもご相談ください。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOW -->
+  <section class="nx-sec nx-flow" id="flow">
+    <div class="nx-in">
+      <p class="nx-label">Flow</p>
+      <h2 class="nx-h2">ご予約から納品まで</h2>
+      <div class="nx-flow-grid">
+        <div class="nx-step">
+          <i>01</i>
+          <h3>LINEで相談</h3>
+          <p>「予約したい」のひと言だけで大丈夫。希望日時と目的をお知らせください。</p>
+          <em>24時間以内に返信</em>
+        </div>
+        <div class="nx-step">
+          <i>02</i>
+          <h3>ヒアリング</h3>
+          <p>世界観・衣装・使用目的を丁寧に確認。当日スムーズに進むよう準備します。</p>
+          <em>LINEで完結</em>
+        </div>
+        <div class="nx-step">
+          <i>03</i>
+          <h3>撮影</h3>
+          <p>ポージング指導をしながら、リラックスして撮影。衣装チェンジも可能です。</p>
+          <em>60分〜</em>
+        </div>
+        <div class="nx-step">
+          <i>04</i>
+          <h3>データ納品</h3>
+          <p>撮影データを全カットお渡し。レタッチオプションも対応します。</p>
+          <em>3〜5営業日</em>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOICES -->
+  <section class="nx-sec" id="voices">
+    <div class="nx-in">
+      <p class="nx-label">Voices</p>
+      <h2 class="nx-h2">お客様の声</h2>
+      <div class="nx-voice-grid">
+        <article class="nx-voice">
+          <q>指名数が2倍になりました。写真1枚でこんなに変わるとは思っていませんでした。終始リラックスして撮れました。</q>
+          <footer><b>A.K. さん</b><span>セラピスト / 20代</span><span class="nx-stars">★★★★★</span></footer>
+        </article>
+        <article class="nx-voice">
+          <q>SNSのフォロワーが増え、雰囲気のある写真が撮れて大満足です。</q>
+          <footer><b>M.T. さん</b><span>ナイトワーカー / 20代</span><span class="nx-stars">★★★★★</span></footer>
+        </article>
+        <article class="nx-voice">
+          <q>初めての撮影で緊張していましたが、自分でもびっくりするくらいかっこよく撮ってもらえました。</q>
+          <footer><b>R.S. さん</b><span>セラピスト / 30代</span><span class="nx-stars">★★★★★</span></footer>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="nx-sec nx-faq" id="faq">
+    <div class="nx-in">
+      <div class="nx-faq-side">
+        <p class="nx-label">FAQ</p>
+        <h2 class="nx-h2">よくある質問</h2>
+        <p>ここにない疑問も、LINEで気軽にお尋ねください。撮影前の不安をなくすところから、撮影は始まっています。</p>
+      </div>
+      <div class="nx-faq-list">
+        <details open>
+          <summary>撮影が初めてでも大丈夫ですか？</summary>
+          <p>はい。ポージング指導を行いますので、撮影経験がない方でも安心してご参加いただけます。夜職・ナイトワーカーの方の撮影も多数対応しております。</p>
+        </details>
+        <details>
+          <summary>キャンセルはできますか？</summary>
+          <p>前日20時までのご連絡は無料でキャンセル・日程変更が可能です。当日キャンセルは料金の50%をいただきます。</p>
+        </details>
+        <details>
+          <summary>衣装は必要ですか？</summary>
+          <p>ご自身の衣装を推奨していますが、スタジオにもレンタル衣装（+¥3,000〜）をご用意しています。</p>
+        </details>
+        <details>
+          <summary>データ納品までどのくらいかかりますか？</summary>
+          <p>通常3〜5営業日以内。お急ぎの場合は即日納品オプションもご相談ください。</p>
+        </details>
+        <details>
+          <summary>個人情報・写真データは守られますか？</summary>
+          <p>厳重に管理します。ポートフォリオへの掲載は必ず事前に許可を取ります。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESS -->
+  <section class="nx-sec nx-access" id="studio">
+    <div class="nx-in">
+      <div>
+        <p class="nx-label">Studio</p>
+        <h2 class="nx-h2">スタジオ情報・<br>アクセス</h2>
+        <dl>
+          <div class="nx-access-row"><dt>Location</dt><dd>東京都渋谷区<small>詳細住所はご予約後にお知らせします</small></dd></div>
+          <div class="nx-access-row"><dt>Access</dt><dd>渋谷駅 徒歩5分以内</dd></div>
+          <div class="nx-access-row"><dt>Hours</dt><dd>10:00 〜 23:00<small>深夜のご相談も可能です</small></dd></div>
+          <div class="nx-access-row"><dt>Price</dt><dd>¥15,000〜（税込）</dd></div>
+          <div class="nx-access-row"><dt>Contact</dt><dd>LINE / DM にてご連絡ください</dd></div>
+        </dl>
+      </div>
+      <div class="nx-access-map" aria-hidden="true">
+        <div class="nx-rings"></div>
+        <i></i>
+        <div>
+          <b>渋谷駅から<br>徒歩5分以内</b>
+          <span>Shibuya, Tokyo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICE (SEO) -->
+  <section class="nx-service">
+    <div class="nx-in">
+      <p class="nx-label">Service</p>
+      <h2>渋谷の宣材写真スタジオ｜カメラマン付きで夜職・ナイトワーカー専門</h2>
+      <p>Night Bloom Studio は渋谷駅徒歩5分の<strong>宣材写真スタジオ</strong>です。全プラン<strong>カメラマン付き</strong>で、<strong>夜職</strong>・ナイトワーカー・セラピスト専門。<strong>渋谷</strong>でのスタジオ撮影・宣材写真・プロフィール写真撮影をお考えなら、プロカメラマンが丁寧にサポートします。¥15,000〜（税込）・24時間LINE受付。</p>
+      <ul class="nx-tags">
+        <li>宣材写真 スタジオ</li><li>夜職 スタジオ</li><li>カメラマン付きスタジオ</li><li>スタジオ 渋谷</li><li>ナイトワーカー 宣材写真</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="nx-cta">
+    <div class="nx-in">
+      <div>
+        <p class="nx-label">Begin your story</p>
+        <h2>写真が変われば、<br>指名も変わる。</h2>
+        <p>「予約したい」のひと言から。即日相談OK、24時間以内にご返信します。</p>
+      </div>
+      <div class="nx-cta-act">
+        <a href="https://lin.ee/7xUnkPO" class="nx-btn nx-btn-line" target="_blank" rel="noopener"><span class="nx-line-mark">L</span>LINEで予約する</a>
+        <a href="#plan" class="nx-btn nx-btn-paper">料金をもう一度見る</a>
+        <small>即日相談OK · 24時間以内にご返信</small>
+      </div>
+    </div>
+  </section>
+
+  <footer class="nx-foot">
+    <div class="nx-in">
+      <a href="#top" class="nx-logo"><b>NIGHT BLOOM STUDIO</b><span>Shibuya · Portrait Studio</span></a>
+      <div class="nx-foot-links">
+        <a href="#whyus">選ばれる理由</a><a href="#plan">料金</a><a href="#flow">ご予約の流れ</a><a href="#faq">よくある質問</a><a href="#studio">アクセス</a>
+      </div>
+      <small>© 2026 Night Bloom Studio. All Rights Reserved.</small>
+    </div>
+  </footer>
+
+  <div class="nx-bar">
+    <a href="https://lin.ee/7xUnkPO" class="nx-btn nx-btn-line" target="_blank" rel="noopener"><span class="nx-line-mark">L</span>今すぐLINEで無料相談 · 24時間受付</a>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var burger=document.getElementById('nxBurger');
+  var sheet=document.getElementById('nxSheet');
+  if(!burger||!sheet)return;
+  function setOpen(open){
+    burger.setAttribute('aria-expanded',open?'true':'false');
+    burger.setAttribute('aria-label',open?'ナビゲーションを閉じる':'ナビゲーションを開く');
+    sheet.classList.toggle('is-open',open);
+    document.documentElement.style.overflow=open?'hidden':'';
+  }
+  burger.addEventListener('click',function(){setOpen(burger.getAttribute('aria-expanded')!=='true');});
+  sheet.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setOpen(false);});});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')setOpen(false);});
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Night Bloom Studio",
+  "alternateName": "渋谷 宣材写真スタジオ カメラマン付き",
+  "description": "渋谷の宣材写真・夜職専門カメラマン付きスタジオ。ナイトワーカー・セラピスト専門の撮影スタジオです。¥15,000〜、渋谷駅徒歩5分。",
+  "url": "https://nightbloom-studio.jp/",
+  "image": "https://nightbloom-studio.jp/wp-content/uploads/2026/03/hero-photo-1.jpg",
+  "address": {"@type": "PostalAddress","streetAddress": "渋谷区","addressLocality": "渋谷","addressRegion": "東京都","postalCode": "150-0002","addressCountry": "JP"},
+  "geo": {"@type": "GeoCoordinates","latitude": 35.6581,"longitude": 139.7017},
+  "openingHoursSpecification": [{"@type": "OpeningHoursSpecification","dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens": "10:00","closes": "23:00"}],
+  "priceRange": "¥15,000〜",
+  "keywords": "宣材写真スタジオ,夜職スタジオ,カメラマン付きスタジオ,スタジオ渋谷,ナイトワーカー撮影"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"撮影が初めてでも大丈夫ですか？","acceptedAnswer":{"@type":"Answer","text":"はい。ポージング指導を行いますので、撮影経験がない方でも安心してご参加いただけます。夜職・ナイトワーカーの方の撮影も多数対応しております。"}},
+    {"@type":"Question","name":"宣材写真スタジオはどこにありますか？","acceptedAnswer":{"@type":"Answer","text":"東京都渋谷区にあります。渋谷駅から徒歩5分以内です。詳細住所はご予約後にお知らせします。"}},
+    {"@type":"Question","name":"カメラマン付きで撮影できますか？","acceptedAnswer":{"@type":"Answer","text":"はい、全てのプランにカメラマンが付きます。プロのカメラマンがポージング指導を行いながら撮影します。"}},
+    {"@type":"Question","name":"夜職・ナイトワーカーの宣材写真に対応していますか？","acceptedAnswer":{"@type":"Answer","text":"はい、夜職・ナイトワーカー専門の撮影スタジオです。業界の空気を知るスタッフが、あなたの魅力を的確に引き出します。"}},
+    {"@type":"Question","name":"料金はいくらですか？","acceptedAnswer":{"@type":"Answer","text":"スタンダードプランは¥15,000（税込）です。60分撮影・カット数制限なし・データ全納品が含まれます。"}}
+  ]
+}
+</script>
