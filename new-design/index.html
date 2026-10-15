@@ -125,19 +125,24 @@
 .nx-sheet a small{font-family:var(--lat);font-style:italic;font-size:15px;color:var(--ink-3);}
 .nx-sheet .nx-btn{margin-top:28px;}
 
-/* hero */
-.nx-hero{position:relative;height:min(94vh,920px);min-height:640px;overflow:hidden;background:var(--char);color:#fff;}
-.nx-hero-ph{position:absolute;inset:0;}
-.nx-hero-ph img{width:100%;height:100%;object-fit:cover;object-position:60% 58%;transform:scale(1.06);animation:nx-kb 14s linear both;}
-@keyframes nx-kb{to{transform:scale(1)}}
-.nx-hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,14,18,.55) 0%,rgba(15,14,18,.12) 26%,transparent 42%),linear-gradient(90deg,rgba(15,14,18,.78) 0%,rgba(15,14,18,.36) 44%,transparent 70%);}
-.nx-hero-side{position:absolute;right:28px;top:50%;transform:translateY(-50%) rotate(180deg);writing-mode:vertical-rl;font-family:var(--lat);font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:rgba(255,255,255,.72);z-index:2;}
+/* hero — whole portraits on the right, copy on the left; quick slideshow */
+.nx-hero{position:relative;height:min(94vh,920px);min-height:640px;display:grid;grid-template-columns:minmax(0,1fr) auto;background:var(--char);color:#fff;overflow:hidden;}
+.nx-hero-ph{grid-column:2;grid-row:1;position:relative;height:100%;aspect-ratio:3/4;background:var(--char-2);overflow:hidden;}
+.nx-slide{position:absolute;inset:0;opacity:0;transform:translateX(48px);transition:opacity .5s var(--ease),transform .65s var(--ease);pointer-events:none;}
+.nx-slide.is-on{opacity:1;transform:none;z-index:1;}
+.nx-slide.is-prev{opacity:1;transform:none;z-index:0;transition:none;}
+.nx-slide img{width:100%;height:100%;object-fit:cover;object-position:center;}
+.nx-hero-shade{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(15,14,18,.55) 0%,rgba(15,14,18,.12) 22%,transparent 34%);}
+.nx-hero-dots{position:absolute;right:18px;bottom:16px;z-index:3;display:flex;gap:6px;}
+.nx-hero-dots button{width:22px;height:2px;border:0;padding:0;background:rgba(255,255,255,.35);cursor:pointer;}
+.nx-hero-dots button.is-on{background:#fff;}
+.nx-hero-side{position:absolute;right:calc(min(94vh,920px) * .75 + 22px);top:50%;transform:translateY(-50%) rotate(180deg);writing-mode:vertical-rl;font-family:var(--lat);font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:rgba(255,255,255,.6);z-index:2;}
 .nx-hero-side::after{content:"";display:block;width:1px;height:56px;background:var(--bloom);margin:0 auto 14px;}
-.nx-hero-copy{position:absolute;left:0;right:0;bottom:0;z-index:2;padding-bottom:clamp(44px,6vw,84px);}
+.nx-hero-copy{grid-column:1;grid-row:1;position:relative;z-index:2;align-self:end;min-width:0;padding:0 48px clamp(44px,6vw,84px) max(24px,calc((100vw - var(--max)) / 2 + 24px));}
 .nx-h1{display:block;font-weight:400;}
 .nx-h1-eyebrow{display:block;font-family:var(--lat);font-style:italic;font-size:clamp(18px,1.6vw,22px);letter-spacing:.04em;color:rgba(255,255,255,.8);opacity:0;animation:nx-rise .9s var(--ease) .2s forwards;}
 .nx-h1-eyebrow > span{font-family:var(--body);font-style:normal;font-size:12px;letter-spacing:.2em;margin-left:16px;color:rgba(255,255,255,.64);}
-.nx-h1-title{display:block;font-family:var(--jp);font-weight:500;font-size:clamp(44px,6.2vw,92px);line-height:1.18;letter-spacing:.02em;margin-top:20px;}
+.nx-h1-title{display:block;font-family:var(--jp);font-weight:500;font-size:clamp(40px,5.2vw,78px);line-height:1.18;letter-spacing:.02em;margin-top:20px;}
 .nx-h1-title .l{display:block;overflow:hidden;}
 .nx-h1-title .l span{display:block;transform:translateY(110%);animation:nx-up 1.1s var(--ease) forwards;}
 .nx-h1-title .l:nth-child(2) span{animation-delay:.14s;}
@@ -148,7 +153,7 @@
 .nx-hero.is-shown .nx-h1-title .l span{transform:none;animation:none;}
 .nx-hero-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-top:34px;opacity:0;animation:nx-rise 1s var(--ease) .8s forwards;}
 .nx-hero-lead{max-width:24em;font-size:14.5px;line-height:1.9;color:rgba(255,255,255,.82);}
-.nx-hero-cta{display:flex;gap:18px;align-items:center;}
+.nx-hero-cta{display:flex;gap:18px;align-items:center;flex:none;}
 .nx-hero-cta .nx-link{color:#fff;border-color:rgba(255,255,255,.55);}
 .nx-hero-below{display:none;background:var(--char);color:#fff;padding:18px 0 28px;}
 
@@ -302,10 +307,8 @@
   .nx-body{margin-top:32px;}
   .nx-cta-row{margin-top:32px;}
   .nx-hero{height:auto;min-height:0;display:block;}
-  .nx-hero-ph{position:relative;aspect-ratio:4/3;max-height:none;}
-  .nx-hero-ph img{object-position:55% 62%;transform:none;animation:none;}
-  .nx-hero-shade{position:absolute;top:0;left:0;right:0;bottom:auto;height:75vw;background:linear-gradient(180deg,rgba(15,14,18,.5) 0%,transparent 40%);}
-  .nx-hero-copy{position:static;background:var(--char);padding:24px 0 0;}
+  .nx-hero-ph{position:relative;height:auto;width:100%;aspect-ratio:3/4;}
+  .nx-hero-copy{position:static;background:var(--char);padding:24px 16px 0;}
   .nx-h1-eyebrow{font-size:16px;}
   .nx-h1-eyebrow > span{display:block;margin:6px 0 0;}
   .nx-h1-title{font-size:clamp(36px,10.4vw,44px);margin-top:12px;}
@@ -349,7 +352,7 @@
 }
 @media (prefers-reduced-motion:reduce){
   .nx *{animation:none !important;transition:none !important;}
-  .nx-hero-ph img{transform:none;}
+  .nx-slide{transform:none;transition:none;}
   .nx-h1-eyebrow,.nx-hero-foot{opacity:1;}
   .nx-h1-title .l span{transform:none;}
   .nx-r-pre{opacity:1;transform:none;}
@@ -388,21 +391,26 @@
 
   <!-- HERO -->
   <section class="nx-hero" id="nxHero" aria-label="メインビジュアル">
-    <div class="nx-hero-ph"><img src="https://nightbloom-studio.jp/wp-content/uploads/2026/03/hero-photo-3.jpg" width="1020" height="1360" alt="渋谷の宣材写真スタジオ Night Bloom Studio で撮影した夜職・ナイトワーカーのポートレート" fetchpriority="high" decoding="async"></div>
-    <div class="nx-hero-shade" aria-hidden="true"></div>
+    <div class="nx-hero-ph" id="nxSlides" aria-roledescription="スライドショー" aria-label="撮影事例のスライド">
+      <div class="nx-slide is-on"><img src="https://nightbloom-studio.jp/wp-content/uploads/2026/03/hero-photo-3.jpg" width="1020" height="1360" alt="渋谷の宣材写真スタジオ Night Bloom Studio で撮影したセラピストのポートレート 1" fetchpriority="high" decoding="async"></div>
+      <div class="nx-slide"><img src="https://nightbloom-studio.jp/wp-content/uploads/2026/03/hero-photo-4.jpg" width="1020" height="1360" alt="夜職・ナイトワーカー向け宣材写真 2" loading="lazy" decoding="async"></div>
+      <div class="nx-slide"><img src="https://nightbloom-studio.jp/wp-content/uploads/2026/03/hero-photo-1.jpg" width="1020" height="1360" alt="セラピスト向け宣材写真 3" loading="lazy" decoding="async"></div>
+      <div class="nx-slide"><img src="https://nightbloom-studio.jp/wp-content/uploads/2026/03/hero-photo-2.jpg" width="1020" height="1360" alt="自然光のプロフィール写真 4" loading="lazy" decoding="async"></div>
+      <div class="nx-slide"><img src="https://nightbloom-studio.jp/wp-content/uploads/2026/03/hero-photo-5.jpg" width="1020" height="1360" alt="セラピスト向け宣材写真 5" loading="lazy" decoding="async"></div>
+      <div class="nx-hero-shade" aria-hidden="true"></div>
+      <div class="nx-hero-dots" id="nxDots" aria-hidden="true"></div>
+    </div>
     <p class="nx-hero-side" aria-hidden="true">Portrait studio — Shibuya</p>
     <div class="nx-hero-copy">
-      <div class="nx-in">
-        <h1 class="nx-h1">
-          <span class="nx-h1-eyebrow">Night Bloom Studio <span>渋谷｜<span class="nx-nw">夜職・ナイトワーカー専門</span>の<span class="nx-nw">宣材写真スタジオ</span>、<span class="nx-nw">カメラマン付き</span></span></span>
-          <span class="nx-h1-title"><span class="l"><span>魅せたい自分を、</span></span><span class="l"><span>武器にする。</span></span></span>
-        </h1>
-        <div class="nx-hero-foot">
-          <p class="nx-hero-lead">指名が伸びない、SNSの反応が薄い。その多くは<span class="nx-nw">写真一枚</span>で変えられます。業界を知る<span class="nx-nw">カメラマン</span>が「魅せ方」を一緒に設計します。</p>
-          <div class="nx-hero-cta">
-            <a href="#works" class="nx-link">View works</a>
-            <a href="https://lin.ee/7xUnkPO" class="nx-btn nx-btn-line" target="_blank" rel="noopener"><span class="nx-lmark">L</span>LINEで予約・相談</a>
-          </div>
+      <h1 class="nx-h1">
+        <span class="nx-h1-eyebrow">Night Bloom Studio <span>渋谷｜<span class="nx-nw">夜職・ナイトワーカー専門</span>の<span class="nx-nw">宣材写真スタジオ</span>、<span class="nx-nw">カメラマン付き</span></span></span>
+        <span class="nx-h1-title"><span class="l"><span>魅せたい自分を、</span></span><span class="l"><span>武器にする。</span></span></span>
+      </h1>
+      <div class="nx-hero-foot">
+        <p class="nx-hero-lead">指名が伸びない、SNSの反応が薄い。その多くは<span class="nx-nw">写真一枚</span>で変えられます。業界を知る<span class="nx-nw">カメラマン</span>が「魅せ方」を一緒に設計します。</p>
+        <div class="nx-hero-cta">
+          <a href="#works" class="nx-link">View works</a>
+          <a href="https://lin.ee/7xUnkPO" class="nx-btn nx-btn-line" target="_blank" rel="noopener"><span class="nx-lmark">L</span>LINEで予約・相談</a>
         </div>
       </div>
     </div>
@@ -650,6 +658,21 @@
     burger.addEventListener('click',function(){setOpen(burger.getAttribute('aria-expanded')!=='true');});
     sheet.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setOpen(false);});});
     document.addEventListener('keydown',function(e){if(e.key==='Escape')setOpen(false);});
+  }
+
+  /* hero slideshow: quick, every 3 seconds */
+  var slidesWrap=document.getElementById('nxSlides');
+  if(slidesWrap){
+    var slides=slidesWrap.querySelectorAll('.nx-slide'),dots=document.getElementById('nxDots'),cur=0,timer=null,DUR=3000;
+    function go(i){
+      var prev=slides[cur]; prev.classList.remove('is-on'); prev.classList.add('is-prev'); setTimeout(function(){prev.classList.remove('is-prev');},750); if(dots)dots.children[cur].classList.remove('is-on');
+      cur=(i+slides.length)%slides.length;
+      slides[cur].classList.add('is-on'); if(dots)dots.children[cur].classList.add('is-on');
+    }
+    function start(){ if(reduce)return; clearInterval(timer); timer=setInterval(function(){go(cur+1);},DUR); }
+    if(dots){ for(var i=0;i<slides.length;i++){ var b=document.createElement('button'); b.type='button'; (function(n){b.addEventListener('click',function(){go(n);start();});})(i); dots.appendChild(b);} dots.children[0].classList.add('is-on'); }
+    start();
+    document.addEventListener('visibilitychange',function(){ if(document.hidden){clearInterval(timer);} else {start();} });
   }
 
   /* header state + mobile bar + parallax, one scroll handler */
